@@ -40,9 +40,9 @@ class Command(BaseCommand):
         if not input_lines:
             raise CommandError('Invalid file, please check and try again.')
         else:
-            print('Reading input file.........')
+            print('\nReading input file.........')
             for line in input_lines:
-                print(f'Processing line: {line}')
+                print(f'Processing command: {line}')
                 # split line into words with whitespace
                 words = line.rstrip('\n').split(' ')
                 if words[0].lower() == 'create_parking_lot':
@@ -62,7 +62,7 @@ class Command(BaseCommand):
 
                 elif words[0].lower() == 'park':
                     # Condition and action for Park
-                    if not (len(words)==4) and not all(words):
+                    if not (len(words)==4) or not all(words):
                         # If not validated print error for this one and execute next one.
                         output_lines.extend(['Park command or input data is invalid.'])
                         continue
@@ -72,7 +72,7 @@ class Command(BaseCommand):
                     nearest_available_slot = Slot.objects.filter(
                         is_available=True
                     ).order_by('id')
-                    selected_slot = nearest_available_slot[0]
+                    
                     if nearest_available_slot:
                         ticket, created = Ticket.objects.get_or_create(
                             vehicle_reg_number=reg_number,
@@ -81,11 +81,12 @@ class Command(BaseCommand):
                         )
                         
                         if not created:
-                            "Ticket is already available with slot"
+                            # Ticket is already available with slot
                             slot_number = ticket.slot.slot_number
                             output_lines.extend([f'{reg_number} already parked at Slot {slot_number}.'])
                             continue
                         else:
+                            selected_slot = nearest_available_slot[0]
                             ticket.slot=selected_slot
                             ticket.save()
                             selected_slot.is_available = False
@@ -96,10 +97,17 @@ class Command(BaseCommand):
                     else:
                         output_lines.extend(['No slots available now!'])
                 elif words[0].lower() == 'slot_numbers_for_driver_of_age':
+                    if not (len(words)==2) or not all(words):
+                        # If not validated print error for this one and execute next one.
+                        output_lines.extend(['slot_numbers_for_driver_of_age or input is invalid.'])
+                        continue
+
                     age=words[1]
-                    ticket_list = Ticket.objects.filter(age_of_driver=int(age))
-                    slots = [str(ticket.slot.slot_number) for ticket in ticket_list]
-                    output_lines.extend([",".join(slots)])
+                    ticket_slot_list = Ticket.objects.filter(
+                        age_of_driver=int(age)
+                    ).values_list('slot__slot_number', flat=True)
+                    
+                    output_lines.extend([",".join([str(slot) for slot in ticket_slot_list])])
 
                 elif words[0].lower() == 'slot_number_for_car_with_number':
                     reg_number = words[1]
@@ -124,6 +132,11 @@ class Command(BaseCommand):
                 
                 # Leave command condition
                 elif words[0].lower() == 'leave':
+                    if not (len(words)==2) or not all(words):
+                        # If not validated print error for this one and execute next one.
+                        output_lines.extend(['Leave / input is invalid.'])
+                        continue
+
                     slot_number = words[1]
                     try:
                         slot_obj = Slot.objects.get(slot_number=slot_number)
