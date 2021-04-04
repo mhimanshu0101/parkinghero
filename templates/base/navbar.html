@@ -1,0 +1,60 @@
+<!-- {% url 'index' as dashboard_url %}
+{% url 'user_upload' as upload_url %}
+{% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
+{% url 'profile' as profile_url %}
+{% url 'production_file' as production_file_download %}
+{% url 'add_user_ca' as add_user_ca %} -->
+
+
+<nav class="navbar navbar-inverse ">
+  <div class="container-fluid"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{dashboard_url}}">{% if brand_name %}{{ brand_name}} {% else %}Golden Copy {% endif %}</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      <li class="nav-item {% if request.path == dashboard_url %}active{% endif %}">
+        <a class="nav-link" href="{{dashboard_url}}">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {% if request.path == upload_url %}active{% endif %}">
+        <a class="nav-link" href="{{ upload_url }}">Upload</a>
+      </li>
+      <li class="nav-item {% if request.path == production_file_download %}active{% endif %}">
+        <a class="nav-link" href="{{ production_file_download }}">Download</a>
+      </li>
+      <li class="nav-item {% if request.path == add_user_ca %}active{% endif %}">
+        <a class="nav-link" href="{{ add_user_ca }}">User CA</a>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" style="height:50px;">
+         {% if request.user.is_authenticated %}
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" style="height: 50px;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <p data-letters={{ request.user|capfirst|make_list|first }}></p>
+          </a>
+          <ul class="dropdown-menu">
+              <li><a href="{{ profile_url }}">User Profile</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="{{ logout_url }}">Logout</a></li>
+          </ul>
+      </li>
+      {% else %}
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{{ login_url }}">Login</a>
+      </li>
+      {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+ 

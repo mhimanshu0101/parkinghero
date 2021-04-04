@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <h2>Ticket Page</h2>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Vehicle Registration</th>
+                    <th scope="col">Driver Age</th>
+                    <th scope="col">Issued at</th>
+                    <th scope="col">Slot no.</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                {% for ticket in ticket_list %}
+                    <tr>
+                        <td>{{ ticket.vehicle_reg_number }}</td>
+                        <td>{{ ticket.age_of_driver }}</td>
+                        <td>{{ ticket.issued_at }}</td>
+                        <td>{{ ticket.slot }}</td>
+                    </tr>
+                {% endfor %}
+                    
+                
+                </tbody>
+            </table>
+            </div>
+        </div>  
+</div>  
+
+{% endblock content %}

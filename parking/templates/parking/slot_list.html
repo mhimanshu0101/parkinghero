@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <h2>Slot Page</h2>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Slot number</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">Parking</th>
+                    <th scope="col">Last Available</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                {% for slot in slot_list %}
+                    <tr>
+                        <td>{{ slot.slot_number }}</td>
+                        <td>{{ slot.is_available }}</td>
+                        <td>{{ slot.parking }}</td>
+                        <td>{{ slot.last_available }}</td>
+                    </tr>
+                {% endfor %}
+                    
+                
+                </tbody>
+            </table>
+            </div>
+        </div>  
+</div>  
+
+{% endblock content %}
