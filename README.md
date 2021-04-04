@@ -44,31 +44,18 @@ or you could download the zip file and unzip it into project folder
   ```
   output looks like:
   ```python
-  Reading input file.........
-Processing line: Create_parking_lot 6
+  Created parking of 6 slots
+Car with vehicle registration number "KA-01-HH-1234" has been parked at slot number 1
+Car with vehicle registration number "PB-01-HH-1234" has been parked at slot number 2
+1,2
+Car with vehicle registration number "PB-01-TG-2341" has been parked at slot number 3
+PB-01-HH-1234 already parked at Slot 2.
+Car with registration number "PB-01-HH-1234" has parked at slot number 2
+2
+Slot number 2 vacated, the car with vehicle registration number "PB-01-HH-1234" left the space, the driver of the car was of age 21
+Car with vehicle registration number "HR-29-TG-3098" has been parked at slot number 2
+KA-01-HH-1234,PB-01-HH-1234
 
-Processing line: Park KA-01-HH-1234 driver_age 21
-
-Processing line: Park PB-01-HH-1234 driver_age 21
-
-Processing line: Slot_numbers_for_driver_of_age 21
-
-Processing line: Park PB-01-TG-2341 driver_age 40
-
-Processing line: Park PB-01-HH-1234 driver_age 21
-
-Processing line: Slot_number_for_car_with_number PB-01-HH-1234
-
-Processing line: Leave 2
-
-Processing line: Park HR-29-TG-3098 driver_age 39
-
-Processing line: Vehicle_registration_number_for_driver_of_age 21
-
-=====================Generating Output======================
-Output saved in txt file as: output.txt
-
--------------------------------------------------------
   ```
  Check generated result in output.txt
     - output.txt will be generated in parkinghero/
