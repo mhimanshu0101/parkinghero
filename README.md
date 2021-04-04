@@ -62,8 +62,7 @@ KA-01-HH-1234,PB-01-HH-1234
   
   ## Run testcase
   ```bash
-  cd testing
-  python test_load_parking.py
+  python manage.py test
   ```
   ##TestExecution output
   ```python
