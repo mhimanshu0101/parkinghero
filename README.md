@@ -37,24 +37,38 @@ or you could download the zip file and unzip it into project folder
   ```
   6. Visit url: http://127.0.0.1:8000/ for GUI
   ## Execute management command to run request input file
+  to execute this command `runserver` is not needed.
   ```bash
   python manage.py load_parking --file=input.txt
   hint: --file flag denotes file location of input request file, for this project repo its available in parkinghero/
   you can modify input.txt as per your test case
   ```
+  Input.txt
+  ```txt
+  Create_parking_lot 6
+  Park KA-01-HH-1234 driver_age 21
+  Park PB-01-HH-1234 driver_age 21
+  Slot_numbers_for_driver_of_age 21
+  Park PB-01-TG-2341 driver_age 40
+  Park PB-01-HH-1234 driver_age 21
+  Slot_number_for_car_with_number PB-01-HH-1234
+  Leave 2
+  Park HR-29-TG-3098 driver_age 39
+  Vehicle_registration_number_for_driver_of_age 21
+  ```
   output looks like:
   ```python
   Created parking of 6 slots
-Car with vehicle registration number "KA-01-HH-1234" has been parked at slot number 1
-Car with vehicle registration number "PB-01-HH-1234" has been parked at slot number 2
-1,2
-Car with vehicle registration number "PB-01-TG-2341" has been parked at slot number 3
-PB-01-HH-1234 already parked at Slot 2.
-Car with registration number "PB-01-HH-1234" has parked at slot number 2
-2
-Slot number 2 vacated, the car with vehicle registration number "PB-01-HH-1234" left the space, the driver of the car was of age 21
-Car with vehicle registration number "HR-29-TG-3098" has been parked at slot number 2
-KA-01-HH-1234,PB-01-HH-1234
+  Car with vehicle registration number "KA-01-HH-1234" has been parked at slot number 1
+  Car with vehicle registration number "PB-01-HH-1234" has been parked at slot number 2
+  1,2
+  Car with vehicle registration number "PB-01-TG-2341" has been parked at slot number 3
+  PB-01-HH-1234 already parked at Slot 2.
+  Car with registration number "PB-01-HH-1234" has parked at slot number 2
+  2
+  Slot number 2 vacated, the car with vehicle registration number "PB-01-HH-1234" left the space, the driver of the car was of age 21
+  Car with vehicle registration number "HR-29-TG-3098" has been parked at slot number 2
+  KA-01-HH-1234,PB-01-HH-1234
 
   ```
  Check generated result in output.txt
